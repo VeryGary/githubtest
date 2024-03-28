@@ -7,9 +7,11 @@ const PORT = process.env.PORT || 8080;
 // Serve static files from the current directory
 app.use(express.static(__dirname));
 
-app.get('/', function(req, res) {
-    res.sendFile(path.join(__dirname, 'emailTemplate.html'));
-});
+app.use(express.json());
+
+const router = require('./routes/router.js')
+app.use('/routes',router);
+
 
 app.listen(PORT, () => {
     console.log(`Server on Port: ${PORT}`);
